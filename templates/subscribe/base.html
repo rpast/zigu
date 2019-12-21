@@ -33,22 +33,32 @@
                         <a class="nav-link" href="{% url "admin:index" %}">Admin</a>
                     </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url "register" %}">Register</a>
-                    </li>
+                    {#Display userpage once logged in#}
+                    {% if user.is_authenticated%}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "userpage" %}">Świątynia</a>
+                        </li>
+                    {% endif %}
+
+                    {#No need to display register button if the user is logged in#}
+                    {% if user.is_authenticated != True%}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "register" %}">Zarejestruj</a>
+                        </li>
+                    {% endif %}
 
                     {#Set logic for LOGOUT button!!!!#}
-{#                    {% if user.is_authenticated %}#}
-{#                        <li>#}
-{#                            <a class="nav-item active" href="{% url "logout" %}">Logout</a>#}
-{#                        </li>#}
-{##}
-{#                    {% else %}#}
-                    {#Create a button in case user is not logged in#}
-{#                        <li>#}
-{#                            <a class="nav-item active" href="{% url "myapp:user_login" %}">Login</a>#}
-{#                        </li>#}
-{#                    {% endif %}#}
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a class="nav-item active" href="{% url "logout" %}">Wyloguj - {{ user.username }}</a>
+                        </li>
+
+                    {% else %}
+                        {#Create a button in case user is not logged in#}
+                        <li>
+                            <a class="nav-item active" href="{% url "login" %}">Zaloguj</a>
+                        </li>
+                    {% endif %}
 
                 </ul>
             </div>

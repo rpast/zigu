@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-# User model goes here:
+# Additional user information model goes here:
 class UserProfileInfo(models.Model):
     # Create this relationship instead of inheriting from User
     # because it can screw up your database

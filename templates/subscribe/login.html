@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+{% extends "subscribe/base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block body_block %}
+
+<div class="jumbotron">
+
+    <h1>Ekran logowania</h1>
+
+    {#Acton attribute is to link the form with view backend#}
+    <form method="POST" action="{% url "login" %}">
+        {% csrf_token %}
+
+        <label for="username">Login:</label>
+        <input type="text" name="username" placeholder="Wpisz nazwę żytkownika">
+
+        <label for="password">Hasło:</label>
+        <input type="password" name="password">
+
+        <input type="submit" value="Zaloguj">
+
+    </form>
+
+</div>
+
+{% endblock %}

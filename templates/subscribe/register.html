@@ -2,26 +2,22 @@
 
 {% extends "subscribe/base.html" %}
 
+{% load crispy_forms_tags %}
 
 {% block body_block %}
     <div class="jumbotron">
-{#        {% if registered %}#}
-{#        <h1>Dziękujemy za rejestrację</h1>#}
-{##}
-{#        {% else %}#}
         <h1>Zarejestruj się tutaj</h1>
 
         {#Enctype attribute is for picture upload to work#}
-        <form enctype="multipart/form-data" method="post">
+        <form enctype="multipart/form-data" method="POST">
 
             {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
             <input type="submit" value="Register">
 
         </form>
-
-{#        {% endif %}#}
 
     </div>
 {% endblock %}

@@ -1,6 +1,11 @@
-from django.shortcuts import render, HttpResponse
-from subscribe.models import User, UserProfileInfo
+from django.shortcuts import render
+from django.urls import reverse
 from subscribe.forms import UserForm, UserProfileForm
+from django.http import HttpResponseRedirect, HttpResponse
+#Below is for login to work
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -10,9 +15,6 @@ def index(request):
 
 
 def user_register(request):
-    # Monitor the state of user
-    registered = False
-
     # React on signal from interface - if user want to send data:
     if request.method == "POST":
         # Instantiate form variables
@@ -30,36 +32,68 @@ def user_register(request):
             user.save()
 
             # Commit False is to prevent data of the profile_form to conflict with the user data
-            profile = profile_form.save(commit= False)
+            profile = profile_form.save(commit=False)
 
             # Here you actually establish one-to-one relationship between the data of the user (already saved)
             # and the profile_form data. You define profile.user with the data gathered by user form.
             profile.user = user
 
+            # Look for profile pic and save if found
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+
             profile.save()
 
-            # add saving the profile pic
+            print(user, "saved")
 
-            print(user_form.cleaned_data, profile_form.cleaned_data)
-
-            registered = True
+            # Login the user
+            login(request, user)
+            # And direct to personal userpage
+            return HttpResponseRedirect(reverse('userpage'))
 
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
 
     return render(request, 'subscribe/register.html', {'user_form': user_form,
-                                                           'profile_form': profile_form,
-                                                           'registered': registered})
+                                                       'profile_form': profile_form,})
 
 
 def user_login(request):
-    return HttpResponse('tutaj będzie strona logowania')
+    """
+    Handle the login mechanics.
+    Grab data from the form if POST & login when validated.
+    """
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print(username, password)
+        user = authenticate(request, username=username, password=password)
+        print(user)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('userpage'))
+            else:
+                return HttpResponse('Konto nieaktywne')
+        else:
+            print('***')
+            print('Ktoś chciał się zalogować i mu nie wyszło')
+            print(f'Username: {username}; Password: {password}')
+
+            return HttpResponse('Niepoprawne logowanie')
+    else:
+        return render(request, 'subscribe/login.html')
 
 
+@login_required
 def user_logout(request):
-    return HttpResponse('tutaj się wylogujesz')
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
 
 
+@login_required
 def user_page(request):
-    return HttpResponse('tutaj będzie spersonalizowana strona użytkownika')
+    return render(request, 'subscribe/userpage.html')

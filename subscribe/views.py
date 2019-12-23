@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.urls import reverse
-from subscribe.forms import UserForm, UserProfileForm
+from subscribe.forms import UserForm, UserProfileForm, UserProfileUpdate
 from django.http import HttpResponseRedirect, HttpResponse
 #Below is for login to work
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.password_validation import validate_password
+from django.core import validators
 
 
 # Create your views here.
@@ -21,7 +24,6 @@ def user_register(request):
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
 
-        # Validate input with pre-built validation
         if user_form.is_valid() and profile_form.is_valid():
 
             # Save basic user data to database
@@ -46,10 +48,7 @@ def user_register(request):
 
             print(user, "saved")
 
-            # Login the user
-            login(request, user)
-            # And direct to personal userpage
-            return HttpResponseRedirect(reverse('userpage'))
+            return HttpResponseRedirect(reverse('login'))
 
     else:
         user_form = UserForm()
@@ -96,4 +95,10 @@ def user_logout(request):
 
 @login_required
 def user_page(request):
-    return render(request, 'subscribe/userpage.html')
+    update_form = UserProfileUpdate()
+
+    context = {
+        'update_form': update_form,
+    }
+
+    return render(request, 'subscribe/userpage.html', context)

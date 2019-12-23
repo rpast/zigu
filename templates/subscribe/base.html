@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
 
 <html lang="pl">
 
@@ -49,14 +51,14 @@
 
                     {#Set logic for LOGOUT button!!!!#}
                     {% if user.is_authenticated %}
-                        <li>
-                            <a class="nav-item active" href="{% url "logout" %}">Wyloguj - {{ user.username }}</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "logout" %}">Wyloguj - {{ user.username }}</a>
                         </li>
 
                     {% else %}
                         {#Create a button in case user is not logged in#}
-                        <li>
-                            <a class="nav-item active" href="{% url "login" %}">Zaloguj</a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "login" %}">Zaloguj</a>
                         </li>
                     {% endif %}
 

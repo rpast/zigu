@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 
 {% extends "subscribe/base.html" %}
-
+{% load crispy_forms_tags %}
 
 
 
 {% block body_block %}
 
     <h1>Witaj {{ user.username }}</h1>
+    <img style="width: 100px;" src="{{user.userprofileinfo.profile_pic.url}}">
+
+    <form>
+        {% csrf_token %}
+        {{ update_form|crispy }}
+        <button type="submit">Wyślij</button>
+    </form>
 
 
 {% endblock %}

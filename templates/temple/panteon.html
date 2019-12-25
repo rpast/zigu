@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "subscribe/base.html" %}
+
+{% block body_block %}
+
+
+
+    {% for god in gods %}
+        <div class="jumbotron">
+
+            <h2>{{ god.name }}</h2>
+            <img src="{{ god.profile_pic.url }}" alt=""></td>
+
+            <h4>Opis:</h4>
+            <p>{{ god.god_description }}</p>
+
+            <h4>Błogosławieństwo:</h4>
+            <h5>{{ god.blessing_name }}</h5>
+            <p>{{ god.blessing_description }}</p>
+
+            <h4>Statystyki:</h4>
+            <p>Sacrum: {{ god.sacrum }}</p>
+            <p>Kształtowanie: {{ god.shaping }}</p>
+            <p>Wir: {{ god.vortex }}</p>
+
+            {% if god.followers.count == 0 %}
+                <h4>Wyznawcy</h4>
+                <p>Brak</p>
+            {% else %}
+                {% for follower in god.followers.all %}
+                    <h4>Wyznawcy</h4>
+                    <p>{{ follower }}</p>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

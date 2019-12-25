@@ -42,6 +42,13 @@
                         </li>
                     {% endif %}
 
+                    {#Display userpage once logged in#}
+                    {% if user.is_authenticated and user.userprofileinfo.gods_associated != 0%}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url "panteon" %}">Panteon</a>
+                        </li>
+                    {% endif %}
+
                     {#No need to display register button if the user is logged in#}
                     {% if user.is_authenticated != True%}
                         <li class="nav-item active">

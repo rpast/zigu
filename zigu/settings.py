@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'subscribe.apps.SubscribeConfig',
+    'temple.apps.TempleConfig',
 ]
 
 MIDDLEWARE = [

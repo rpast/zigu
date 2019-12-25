@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% extends "subscribe/base.html" %}
+{% load crispy_forms_tags %}
+
+
+
+
+{% block body_block %}
+
+<div class="jumbotron">
+        <h1>Stwórz bóstwo</h1>
+
+        {#Enctype attribute is for picture upload to work#}
+        <form enctype="multipart/form-data" method="POST">
+
+            {% csrf_token %}
+
+            {{ god_form|crispy }}
+            <input type="submit" value="Stwórz">
+
+        </form>
+
+    </div>
+
+{% endblock %}

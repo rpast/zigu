@@ -1,20 +1,14 @@
 from django.shortcuts import render
 from django.urls import reverse
-from subscribe.forms import UserForm, UserProfileForm, UserProfileUpdate
+from django.contrib import messages
+from subscribe.forms import UserForm, UserProfileForm, UserProfileUpdate, UserUpdateForm
 from django.http import HttpResponseRedirect, HttpResponse
 #Below is for login to work
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from django.contrib.auth.password_validation import validate_password
-from django.core import validators
-
 
 # Create your views here.
-
-
-def index(request):
-    return render(request, 'subscribe/index.html')
 
 
 def user_register(request):
@@ -94,11 +88,28 @@ def user_logout(request):
 
 
 @login_required
-def user_page(request):
-    update_form = UserProfileUpdate()
+def profile_update(request):
+    if request.method == 'POST':
+        update_user_form = UserUpdateForm(request.POST,
+                                          instance=request.user)
+        update_picture_form = UserProfileUpdate(request.POST,
+                                                request.FILES,
+                                                instance=request.user.userprofileinfo)
+
+        if update_user_form.is_valid() and update_picture_form.is_valid():
+            update_user_form.save()
+            update_picture_form.save()
+            messages.success(request, f'Twoje konto zostało aktualizowane. Zostaniesz teraz przeniesiony do świątyni')
+            return HttpResponseRedirect(reverse('userpage'))
+
+
+    else:
+        update_user_form = UserUpdateForm(instance=request.user)
+        update_picture_form = UserProfileUpdate(instance=request.user.userprofileinfo)
 
     context = {
-        'update_form': update_form,
+        'up_pic_form': update_picture_form,
+        'up_user_form': update_user_form,
     }
 
-    return render(request, 'subscribe/userpage.html', context)
+    return render(request, 'subscribe/profileupdate.html', context)

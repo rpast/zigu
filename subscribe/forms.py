@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from subscribe.models import UserProfileInfo
 from django.contrib.auth.password_validation import validate_password
 from django import forms
+from django.db import models
 
 
 
@@ -46,6 +47,7 @@ class UserForm(forms.ModelForm):
 
 # Set additional profile information class
 class UserProfileForm(forms.ModelForm):
+
     class Meta():
         model = UserProfileInfo
         fields = (
@@ -58,8 +60,21 @@ class UserProfileForm(forms.ModelForm):
 
 # Allow users to update their profile picture
 class UserProfileUpdate(forms.ModelForm):
+
+    profile_pic = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
     class Meta:
         model = UserProfileInfo
         fields = (
             'profile_pic',
+        )
+
+
+# Allow users to update their user data
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'email',
         )

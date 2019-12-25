@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+{% extends "subscribe/base.html" %}
+
+
+
+
+{% block body_block %}
+
+    <h1>Witaj {{ user.username }}</h1>
+
+
+    <img src="{{user.userprofileinfo.profile_pic.url}}">
+
+    <p><a href="{% url 'profile_update' %}">Ustawienia konta</a></p>
+
+
+    {% if user.userprofileinfo.gods_associated == 0 %}
+        <p>Nie masz jeszcze żadnych bóstw opiekuńczych. Kliknij 'Zostań wyznawcą', by spotkać się z wysłannikiem panteonu.</p>
+
+        <form action="{% url "userpage" %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Zostań wyznawcą">
+        </form>
+
+
+    {% else %}
+        <p><a href="{% url 'creategod' %}">Stwórz własne bóstwo</a></p>
+        <p>Twoje bóstwa opiekuńcze oraz talenty, którymi cię obdarzyły.</p>
+
+
+        {% for god in user.god_set.all %}
+            <div class="jumbotron">
+                <h2>{{ god.name }}</h2>
+                <img src="{{ god.profile_pic.url }}" alt=""></td>
+
+                <h4>Opis:</h4>
+                <p>{{ god.god_description }}</p>
+
+                <h4>Błogosławieństwo:</h4>
+                <h5>{{ god.blessing_name }}</h5>
+                <p>{{ god.blessing_description }}</p>
+
+                <h4>Statystyki:</h4>
+                <p>Sacrum: {{ god.sacrum }}</p>
+                <p>Kształtowanie: {{ god.shaping }}</p>
+                <p>Wir: {{ god.vortex }}</p>
+            </div>
+
+        {% endfor %}
+
+    {%  endif %}
+
+{% endblock %}

@@ -19,6 +19,8 @@ class UserProfileInfo(models.Model):
 
     gods_associated = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(3)])
 
+    gods_created = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(3)])
+
 
     # In case you want to print the user
     def __str__(self):

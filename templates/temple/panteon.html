@@ -3,6 +3,9 @@
 
 {% block body_block %}
 
+    <h1>Panteon</h1>
+    <p>Tu możesz przeglądnąć wszystkie bóstwa z naszej świątyni i zdecydować czy chcesz zostać ich wyznawcą.</p>
+    <p>Możesz zostać czcicielem maksymalnie dwóch bóstw poza tym, które uzyskałeś w ramach rytuału inicjacji.</p>
 
 
     {% for god in gods %}
@@ -33,6 +36,15 @@
                 {% endfor %}
             {% endif %}
 
+            {% if gods_cap > 0 %}
+                {% if god.name not in gods_excluded %}
+                    <form action="{% url "panteon" %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="god_name" value="{{ god.name }}">
+                        <input type="submit" value="Zostań wyznawcą">
+                    </form>
+                {% endif %}
+            {% endif %}
         </div>
     {% endfor %}
 

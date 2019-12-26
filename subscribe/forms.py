@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from subscribe.models import UserProfileInfo
+from django.core import validators
 from django.contrib.auth.password_validation import validate_password
 from django import forms
 from django.db import models
@@ -10,6 +11,11 @@ from django.db import models
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label='Hasło', help_text='Minimum 8 znaków')
     password2 = forms.CharField(widget=forms.PasswordInput, label='Powtórz hasło')
+
+    #Catch potential bots
+    bnet = forms.CharField(required=False,
+                           widget=forms.HiddenInput,
+                           validators=[validators.MaxLengthValidator(0)])
 
     class Meta():
         model = User
@@ -68,6 +74,9 @@ class UserProfileUpdate(forms.ModelForm):
         fields = (
             'profile_pic',
         )
+        labels = {
+            'profile_pic': ('Zdjęcie profilowe'),
+        }
 
 
 # Allow users to update their user data

@@ -30,8 +30,8 @@
                 <h4>Wyznawcy</h4>
                 <p>Brak</p>
             {% else %}
+                <h4>Wyznawcy</h4>
                 {% for follower in god.followers.all %}
-                    <h4>Wyznawcy</h4>
                     <p>{{ follower }}</p>
                 {% endfor %}
             {% endif %}

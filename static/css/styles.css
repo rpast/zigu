@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|PT+Sans&display=swap');
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Set variables */
+:root {
+    --serif-font: 'Bebas Neue', cursive;
+    --sans-font: 'PT Sans', sans-serif;
+
+    /*used*/
+    --dark2: #212529;
+    --light1: #e1e1ff;
+    --underline-dark: #3d2d2b;
+
+    /*unused*/
+    --dark1: #343A40;
+    --blue: #80BFFF;
+    --light2: #dcdcff;
+    --underline: #d9bba6;
+
+}
+
+/*Tags*/
+
+html {
+    background-color: var(--dark2);
+    height: 100%;
+    font-size: 1.2em;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--serif-font) !important;
+    margin-bottom: 0.8em !important;
+    letter-spacing: 0.4px;
+    font-weight: bold !important;
+}
+
+lead {
+    display: block;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 2em !important;
+}
+
+p{
+    margin: 1em 0em;
+}
+
+strong {
+    color: var(--underline-dark);
+}
+
+/*Classes*/
+
+.canvas {
+    background-color: var(--dark2);
+    height: 100%;
+    color: var(--light1);
+    line-height: 1.5;
+    font-family: var(--sans-font) !important;
+    letter-spacing: 0.4px;
+}
+
+.navbar {
+    margin-bottom: 2em;
+}
+
+.nav-item {
+    margin: 0 1.2em;
+}
+
+.jumbotron {
+    color: black;
+    background-color: var(--light2) !important;
+}
+
+.welcome-header h1 {
+    margin-bottom: 0.2em !important;
+}
+
+.messages {
+    color: var(--underline);
+}
+
+.zigu-logo {
+    width: 6rem;
+}
+
+.text {
+    margin: 0 2em;
+    /*width: 80% !important;*/
+}
+
+.big-bottom-margin {
+    margin-bottom: 4em;
+}
+
+.medium-bottom-margin {
+    margin-bottom: 2em;
+}
+
+.small-bottom-margin {
+    margin-bottom: 1em;
+}
+
+.footer {
+    background-color: var(--dark1);
+    margin-bottom: 0;
+}
+
+.footer p {
+    margin-bottom: 0;
+    padding-bottom: 4em;
+    padding-top: 2em;
+}
+
+.input {
+    width: 100%;
+    max-width: 300px;
+}
+

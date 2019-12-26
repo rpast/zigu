@@ -7,24 +7,36 @@
 
 {% block body_block %}
 
-<div class="jumbotron">
+    {% if messages %}
+            {% for message in messages %}
+                <p class="messages">{{ message }}</p>
+            {% endfor %}
+    {% endif %}
 
-    <h1>Ekran logowania</h1>
+    <div class="jumbotron">
 
-    {#Acton attribute is to link the form with view backend#}
-    <form method="POST" action="{% url "login" %}">
-        {% csrf_token %}
+        <h1>Ekran logowania</h1>
 
-        <label for="username">Login:</label>
-        <input type="text" name="username" placeholder="Wpisz nazwę żytkownika">
+        {#Acton attribute is to link the form with view backend#}
+        <form method="POST" action="{% url "login" %}">
+            {% csrf_token %}
 
-        <label for="password">Hasło:</label>
-        <input type="password" name="password">
+             <div class="form-group">
+                <label for="username">Login:</label>
+                <input type="text" name="username" placeholder="Wpisz nazwę żytkownika" class="input">
+             </div>
 
-        <input type="submit" value="Zaloguj">
+            <div class="medium-bottom-margin">
+            <div class="form-group">
+                <label for="password">Hasło:</label>
+                <input type="password" name="password" class="input">
+            </div>
+            </div>
 
-    </form>
+            <input type="submit" class="btn btn-outline-dark" value="Zaloguj">
 
-</div>
+        </form>
+
+    </div>
 
 {% endblock %}

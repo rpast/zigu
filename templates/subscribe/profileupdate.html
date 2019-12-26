@@ -7,20 +7,25 @@
 
 {% block body_block %}
 
+    <div class="medium-bottom-margin">
     <h1>Witaj {{ user.username }}</h1>
     <p>Tutaj możesz zmienić szczegóły swojego konta</p>
 
 
     <img src="{{user.userprofileinfo.profile_pic.url}}">
+    </div>
 
-
-    {#The form is to extend the app with ability to change profile_pic#}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ up_user_form|crispy }}
-        {{ up_pic_form|crispy }}
-    <button type="submit">Wyślij</button>
-    </form>
+    <div class="jumbotron">
+        <div class="medium-bottom-margin">
+        {#The form is to extend the app with ability to change profile_pic#}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ up_user_form|crispy }}
+            {{ up_pic_form|crispy }}
+        </div>
+            <button type="submit" class="btn btn-outline-dark">Aktualizuj</button>
+        </form>
+    </div>
 
 
 {% endblock %}

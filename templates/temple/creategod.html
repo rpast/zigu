@@ -8,8 +8,8 @@
 
 {% block body_block %}
 
-    <div class="jumbotron">
-        <h1>Stwórz bóstwo</h1>
+    <h1>Stwórz bóstwo</h1>
+    <div class="medium-bottom-margin">
         {% if gods_cap >= 2 %}
             <p>Możesz stworzyć jeszcze {{ gods_cap }} bóstwa</p>
         {% endif %}
@@ -19,15 +19,18 @@
         {% if gods_cap == 0 %}
             <p>Twój limit został wykorzystany. Jeśli nadal chcesz się bawić, skontaktuj się z architektem.</p>
         {% endif %}
+    </div>
 
+    <div class="jumbotron">
         {% if gods_cap > 0 %}
             {#Enctype attribute is for picture upload to work#}
             <form enctype="multipart/form-data" method="POST">
 
                 {% csrf_token %}
-
+                <div class="medium-bottom-margin">
                 {{ god_form|crispy }}
-                <input type="submit" value="Stwórz">
+                </div>
+                <input type="submit" value="Stwórz" class="btn btn-outline-dark">
 
             </form>
         {% endif %}

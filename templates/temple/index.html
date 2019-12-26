@@ -5,10 +5,45 @@
 {% block body_block %}
 
 <div class="jumbotron">
+    <div class="text">
+        <div class="welcome-header">
+            <h1>Zigu</h1>
+            <lead>Świątynia & Lombard od 2007</lead>
+        </div>
 
-    <h1>Witamy w Zigu</h1>
-    <lead>Świątynia & Lombard</lead>
+        <p class="big-bottom-margin">Zigu to lombard, który jako pierwszy w Polsce został przekształcony w związek wyznaniowy. Jesteśmy
+        wyznawcami starożytnego panteonu bóstw zaginionych w czasach Wielkiego Potopu. Tworzymy wspólnotę braci
+        i sióstr zjednanych w łasce talentów, którymi obdarzają nas nasi patroni.</p>
 
+
+
+        {% if not user.is_authenticated %}
+            <h4>Schody do Świątyni</h4>
+
+            <p>Znajdujesz się w naszej cyfrowej świątyni. Możesz wspiąć się po Schodach na jej taras. Pamiętaj, że
+            Światło wszystko widzi.</p>
+
+            <p>Jeśli chcesz zostać członkiem naszej społeczności,
+            zarejestruj się klikając na <strong>'Dołącz'</strong>.
+            Jeśli jesteś już jednym z nas, kliknij <strong>'Zaloguj'</strong></p>
+        {% else %}
+            <h4>Taras</h4>
+            <p>
+                W <strong>Świątyni</strong> przejdziesz rytuał inicjacji, podczas którego nawiążesz kontakt
+                z wysłannikiem Panteonu. Rytuał zapewni ci łaskę talentów, które oferują nasze bóstwa.
+                Następnie, możesz zapoznać się z <strong>Panteonem</strong>. Zdecydujesz tam jakim jeszcze bóstwom chcesz
+                oddawać cześć.
+            </p>
+            <p class="big-bottom-margin">
+                Nasi bracia i siostry, po spojrzeniu w Światło, odkrywają w sobie pierwotną iskrę. Ten ogień pozwala na
+                rozpalenie kosmicznego pieca i wybudzenie nowych duchów, które zostają włączone w Panteon
+                Przejdź ze Świątyni do <strong>Ołtarza</strong>, by stworzyć nowego boga. Pamiętaj, że chcesz zestrzelić
+                Księżyc.
+            </p>
+
+        {% endif %}
+
+    </div>
 </div>
 
 {% endblock %}

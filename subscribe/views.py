@@ -42,6 +42,7 @@ def user_register(request):
 
             print(user, "saved")
 
+            messages.error(request, f'Udało się! Teraz może się zalogować.')
             return HttpResponseRedirect(reverse('login'))
 
     else:
@@ -70,13 +71,15 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('userpage'))
             else:
-                return HttpResponse('Konto nieaktywne')
+                messages.error(request, f'Konto nieaktywne')
+                return HttpResponseRedirect(reverse('login'))
         else:
             print('***')
             print('Ktoś chciał się zalogować i mu nie wyszło')
             print(f'Username: {username}; Password: {password}')
 
-            return HttpResponse('Niepoprawne logowanie')
+            messages.error(request, f'Niepoprawne logowanie')
+            return HttpResponseRedirect(reverse('login'))
     else:
         return render(request, 'subscribe/login.html')
 
@@ -99,7 +102,7 @@ def profile_update(request):
         if update_user_form.is_valid() and update_picture_form.is_valid():
             update_user_form.save()
             update_picture_form.save()
-            messages.success(request, f'Twoje konto zostało aktualizowane. Zostaniesz teraz przeniesiony do świątyni')
+            messages.success(request, f'Twoje konto zostało aktualizowane.')
             return HttpResponseRedirect(reverse('userpage'))
 
 

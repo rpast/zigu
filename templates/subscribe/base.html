@@ -8,6 +8,7 @@
 
         <meta charset="UTF-8">
 
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -18,69 +19,79 @@
 
     <body>
 
-        {# Navigation bar setup#}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="canvas">
 
-            <a class="navbar-brand logo" href="{% url "index" %}">ZIGU</a>
+            <div class="container">
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                {# Navigation bar setup#}
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container">
 
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <a class="navbar-brand logo" href="{% url "index" %}"><img class="zigu-logo" src="{% static 'images/logo.png' %}" alt="Zigu logo"></a>
 
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url "admin:index" %}">Admin</a>
-                    </li>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-                    {#Display userpage once logged in#}
-                    {% if user.is_authenticated%}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url "userpage" %}">Świątynia</a>
-                        </li>
-                    {% endif %}
 
-                    {#Display userpage once logged in#}
-                    {% if user.is_authenticated and user.userprofileinfo.gods_associated != 0%}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url "panteon" %}">Panteon</a>
-                        </li>
-                    {% endif %}
+                        <div class="collapse navbar-collapse align-items-center" id="navbarNavDropdown">
 
-                    {#No need to display register button if the user is logged in#}
-                    {% if user.is_authenticated != True%}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url "register" %}">Zarejestruj</a>
-                        </li>
-                    {% endif %}
+                            <div class="navbar-nav ml-auto align-items-center">
+            {#                    <li class="nav-item active">#}
+            {#                        <a class="nav-link" href="{% url "admin:index" %}">Admin</a>#}
+            {#                    </li>#}
 
-                    {#Set logic for LOGOUT button!!!!#}
-                    {% if user.is_authenticated %}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url "logout" %}">Wyloguj - {{ user.username }}</a>
-                        </li>
+                                {#Display userpage once logged in#}
+                                {% if user.is_authenticated%}
+                                    <div class="nav-item active">
+                                        <a class="nav-link" href="{% url "userpage" %}">Świątynia</a>
+                                    </div>
+                                {% endif %}
 
-                    {% else %}
-                        {#Create a button in case user is not logged in#}
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url "login" %}">Zaloguj</a>
-                        </li>
-                    {% endif %}
+                                {#Display userpage once logged in#}
+                                {% if user.is_authenticated and user.userprofileinfo.gods_associated != 0%}
+                                    <div class="nav-item active">
+                                        <a class="nav-link" href="{% url "panteon" %}">Panteon</a>
+                                    </div>
+                                {% endif %}
 
-                </ul>
+                                {#No need to display register button if the user is logged in#}
+                                {% if user.is_authenticated != True%}
+                                    <div class="nav-item active order-3">
+                                        <a class="nav-link" href="{% url "register" %}">Dołącz</a>
+                                    </div>
+                                {% endif %}
+
+                                {#Set logic for LOGOUT button!!!!#}
+                                {% if user.is_authenticated %}
+                                    <div class="nav-item active">
+                                        <a class="nav-link" href="{% url "logout" %}">Wyloguj - {{ user.username }}</a>
+                                    </div>
+
+                                {% else %}
+                                    {#Create a button in case user is not logged in#}
+                                    <div class="nav-item active">
+                                        <a class="nav-link" href="{% url "login" %}">Zaloguj</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                {# Non-inherited section below#}
+                <div class="container">
+                    {% block body_block %}
+
+
+                    {% endblock %}
+                </div>
+
+                <div class="footer container">
+                    <p>Footer</p>
+                </div>
             </div>
-        </nav>
-
-        {# Non-inherited section below#}
-        <div class="container">
-            {% block body_block %}
-
-
-            {% endblock %}
         </div>
-
-
     </body>
 </html>

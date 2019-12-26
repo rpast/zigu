@@ -4,6 +4,13 @@
 {% load crispy_forms_tags %}
 
 {% block body_block %}
+
+    {% if messages %}
+            {% for message in messages %}
+                <p class="messages">{{ message }}</p>
+            {% endfor %}
+    {% endif %}
+
     <div class="jumbotron">
         <h1>Zarejestruj się tutaj</h1>
 
@@ -11,10 +18,11 @@
         <form enctype="multipart/form-data" method="POST">
 
             {% csrf_token %}
-
-            {{ user_form|crispy }}
-            {{ profile_form|crispy }}
-            <input type="submit" value="Register">
+            <div class="medium-bottom-margin">
+                {{ user_form|crispy }}
+                {{ profile_form|crispy }}
+            </div>
+            <input type="submit" value="Dołącz" class="btn btn-outline-dark">
 
         </form>
 

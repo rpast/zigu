@@ -13,13 +13,13 @@
 
     /*used*/
     --dark2: #212529;
-    --light1: #e1e1ff;
+    --light1: #eaecff;
+    --light2: #e7e9ff;
     --underline-dark: #3d2d2b;
 
     /*unused*/
     --dark1: #343A40;
     --blue: #80BFFF;
-    --light2: #dcdcff;
     --underline: #d9bba6;
 
 }
@@ -186,6 +186,12 @@ strong {
     color: var(--light1);
 }
 
+.profile-pic {
+    height: auto;
+    width: auto;
+}
+
+
 
 
 /*Media queries*/
@@ -211,6 +217,26 @@ strong {
     }
 
     .follow-btn {
+        margin-bottom: 2em;
+    }
+
+    .jumbotron .text {
+        margin: 0em 0.5em;
+    }
+
+    .navbar {
+        width: 100vw;
+    }
+
+    .container.wrapper {
+        padding: 0 !important;
+    }
+
+    .profile-pic {
+        height: auto;
+        width: auto;
+        max-width: 200px;
+        max-height: 250px;
         margin-bottom: 2em;
     }
 }

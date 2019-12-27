@@ -32,7 +32,7 @@
         <div class="user-pic-box">
 
             <a href="{% url 'profile_update' %}">
-                <img src="{{user.userprofileinfo.profile_pic.url}}">
+                <img src="{{user.userprofileinfo.profile_pic.url}}" class="profile-pic">
             </a>
 
         </div>
@@ -74,9 +74,10 @@
 
     </div>
 
+
     {% if user.userprofileinfo.gods_associated > 0 %}
 
-
+    <div class="container">
         <h4>Naczynie wypełnia się darami.</h4>
 
         {% for god in user.god_set.all %}
@@ -84,7 +85,7 @@
                 <div class="god-box">
                     <div class="god-pic-box">
                         <h2>{{ god.name }}</h2>
-                        <img src="{{ god.profile_pic.url }}" alt=""></td>
+                        <img src="{{ god.profile_pic.url }}" class="profile-pic" alt=""></td>
                     </div>
 
                     <div>
@@ -106,6 +107,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         {% endfor %}
 

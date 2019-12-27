@@ -26,9 +26,9 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = '2a!m=dc^i6w%)+e3hc52d8%u*w2+2-jl7i_dk%lxhcp_l*o-at'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nefiu.pythonanywhere.com', 'www.zigu.pl']
 
 
 # Application definition

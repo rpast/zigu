@@ -13,45 +13,98 @@
             {% endfor %}
     {% endif %}
 
-    <h1>Witaj {{ user.username }}</h1>
-
-
-    <img src="{{user.userprofileinfo.profile_pic.url}}">
-
-    <p><a href="{% url 'profile_update' %}">Ustawienia konta</a></p>
-
+    <div class="medium-bottom-margin">
+    <h1>{{ user.username }}</h1>
 
     {% if user.userprofileinfo.gods_associated == 0 %}
-        <p>Nie masz jeszcze żadnych bóstw opiekuńczych. Kliknij 'Zostań wyznawcą', by spotkać się z wysłannikiem panteonu.</p>
-
-        <form action="{% url "userpage" %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Zostań wyznawcą">
-        </form>
-
-
+        <p>Witaj w Świątyni. Tutaj możesz przejść przez rytuał inicjacji, by stać się naczyniem dla bóstw naszego Panteonu.
+        Jeśli czujesz się na siłach, kliknij <strong>Inicjacja</strong>, a spłynie na ciebie Światło.
+        Klikając w zdjęcie profilowe, możesz dokonać zmian w swoim koncie.</p>
     {% else %}
-        <p><a href="{% url 'creategod' %}">Stwórz własne bóstwo</a></p>
-        <p><a href="{% url 'panteon' %}">Przeglądaj panteon</a></p>
-        <p>Twoje bóstwa opiekuńcze oraz talenty, którymi cię obdarzyły.</p>
+        <p>Witaj w Świątyni. Każdy ma w sobie miejsce na więcej niż jednego boga. Kliknij <strong>Panteon</strong>, by
+            nawiązać kontakt z innymi duchami. Możesz dać narodziny nowemu bogu klikając w <strong>Ołtarz</strong>.
+            Klikając w zdjęcie profilowe, możesz dokonać zmian w swoim koncie.</p>
+    {% endif %}
+    </div>
 
+    <div class="user-box big-bottom-margin">
+
+        <div class="user-pic-box">
+
+            <a href="{% url 'profile_update' %}">
+                <img src="{{user.userprofileinfo.profile_pic.url}}">
+            </a>
+
+        </div>
+
+        <div>
+
+            <div class="user-stats-box big-bottom-margin">
+                    <p>Ilu bogów możesz jeszcze ze sobą powiązać: <strong>{{ follow_cap }}</strong></p>
+                    <p>Ilu bogów możesz jeszcze stworzyć: <strong>{{ creation_cap }}</strong></p>
+            </div>
+
+
+            {% if user.userprofileinfo.gods_associated == 0 %}
+                <div class="big-bottom-margin">
+                    <p>Nie masz jeszcze żadnych bóstw opiekuńczych. Kliknij <strong>Inicjacja</strong>, by spotkać się
+                        z wysłannikiem panteonu.</p>
+                </div>
+
+
+                <form action="{% url "userpage" %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Inicjacja" class="btn btn-outline-light">
+                </form>
+
+
+
+            {% else %}
+
+
+                <p><a href="{% url 'creategod' %}" class="btn btn-outline-light">Ołtarz</a></p>
+                <p><a href="{% url 'panteon' %}" class="btn btn-outline-light">Panteon</a></p>
+
+
+            {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% if user.userprofileinfo.gods_associated > 0 %}
+
+
+        <h4>Naczynie wypełnia się darami.</h4>
 
         {% for god in user.god_set.all %}
             <div class="jumbotron">
-                <h2>{{ god.name }}</h2>
-                <img src="{{ god.profile_pic.url }}" alt=""></td>
+                <div class="god-box">
+                    <div class="god-pic-box">
+                        <h2>{{ god.name }}</h2>
+                        <img src="{{ god.profile_pic.url }}" alt=""></td>
+                    </div>
 
-                <h4>Opis:</h4>
-                <p>{{ god.god_description }}</p>
+                    <div>
+                        <div class="medium-bottom-margin">
+                            <h4>Opis:</h4>
+                            <p>{{ god.god_description }}</p>
+                        </div>
 
-                <h4>Błogosławieństwo:</h4>
-                <h5>{{ god.blessing_name }}</h5>
-                <p>{{ god.blessing_description }}</p>
+                        <div class="big-bottom-margin">
+                            <h4>Błogosławieństwo:</h4>
+                            <h5>{{ god.blessing_name }}</h5>
+                            <p>{{ god.blessing_description }}</p>
+                        </div>
 
-                <h4>Statystyki:</h4>
-                <p>Sacrum: {{ god.sacrum }}</p>
-                <p>Kształtowanie: {{ god.shaping }}</p>
-                <p>Wir: {{ god.vortex }}</p>
+                        <h4>Statystyki:</h4>
+                        <p>Sacrum: <strong>{{ god.sacrum }}</strong></p>
+                        <p>Kształtowanie: <strong>{{ god.shaping }}</strong></p>
+                        <p>Wir: <strong>{{ god.vortex }}</strong></p>
+                    </div>
+                </div>
             </div>
 
         {% endfor %}

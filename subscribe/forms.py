@@ -9,7 +9,7 @@ from django.db import models
 
 # Set the regular user form
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label='Hasło', help_text='Minimum 8 znaków')
+    password = forms.CharField(widget=forms.PasswordInput, label='Hasło', help_text='Minimum 6 znaków')
     password2 = forms.CharField(widget=forms.PasswordInput, label='Powtórz hasło')
 
     #Catch potential bots
@@ -62,6 +62,9 @@ class UserProfileForm(forms.ModelForm):
         labels = {
             'profile_pic': ('Zdjęcie profilowe'),
         }
+        help_texts = {
+            'profile_pic': ('Niewymagane'),
+        }
 
 
 # Allow users to update their profile picture
@@ -76,6 +79,9 @@ class UserProfileUpdate(forms.ModelForm):
         )
         labels = {
             'profile_pic': ('Zdjęcie profilowe'),
+        }
+        help_texts = {
+            'profile_pic': ('Niewymagane'),
         }
 
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib import messages
 from subscribe.forms import UserForm, UserProfileForm, UserProfileUpdate, UserUpdateForm
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 #Below is for login to work
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -42,7 +42,7 @@ def user_register(request):
 
             print(user, "saved")
 
-            messages.error(request, f'Udało się! Teraz może się zalogować.')
+            messages.success(request, f'Udało się! Teraz może się zalogować.')
             return HttpResponseRedirect(reverse('login'))
 
     else:
@@ -62,14 +62,13 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print(username, password)
+
         user = authenticate(request, username=username, password=password)
-        print(user)
 
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(reverse('userpage'))
+                return HttpResponseRedirect(reverse('index'))
             else:
                 messages.error(request, f'Konto nieaktywne')
                 return HttpResponseRedirect(reverse('login'))
@@ -87,6 +86,7 @@ def user_login(request):
 @login_required
 def user_logout(request):
     logout(request)
+    messages.success(request, f'Użytkownik wylogowany')
     return HttpResponseRedirect(reverse('index'))
 
 

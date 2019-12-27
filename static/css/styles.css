@@ -35,7 +35,7 @@ html {
 h1, h2, h3, h4 {
     font-family: var(--serif-font) !important;
     margin-bottom: 0.8em !important;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.03em;
     font-weight: bold !important;
 }
 
@@ -51,10 +51,14 @@ p{
 }
 
 strong {
-    color: var(--underline-dark);
+    color: var(--underline);
 }
 
 /*Classes*/
+
+.jumbotron strong {
+    color: var(--underline-dark);
+}
 
 .canvas {
     background-color: var(--dark2);
@@ -121,5 +125,93 @@ strong {
 .input {
     width: 100%;
     max-width: 300px;
+}
+
+.user-box {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.user-pic-box {
+    width: 50%;
+}
+
+.initiation-btn-box {
+    margin: 0 auto;
+}
+
+.god-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.god-pic-box {
+    width: 40%;
+}
+
+.followers-list {
+    display: flex;
+    flex-direction: row;
+    color: var(--underline-dark);
+    flex-wrap: wrap;
+}
+
+.followers-list-item {
+    margin-right: 1em;
+}
+
+.follower-pic {
+    width: 35px;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.footer-box {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 0.8em;
+    margin-right: 2em;
+}
+
+.git-link {
+    text-decoration: none;
+    color: var(--underline);
+}
+.git-link:hover {
+    text-decoration: none;
+    color: var(--light1);
+}
+
+
+
+/*Media queries*/
+@media only screen and (max-width: 991px) {
+    .user-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .user-pic-box {
+        margin-bottom: 2em;
+    }
+
+    .god-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .god-pic-box {
+    width: 100%;
+    }
+
+    .follow-btn {
+        margin-bottom: 2em;
+    }
 }
 

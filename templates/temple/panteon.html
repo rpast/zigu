@@ -4,47 +4,76 @@
 {% block body_block %}
 
     <h1>Panteon</h1>
-    <p>Tu możesz przeglądnąć wszystkie bóstwa z naszej świątyni i zdecydować czy chcesz zostać ich wyznawcą.</p>
-    <p>Możesz zostać czcicielem maksymalnie dwóch bóstw poza tym, które uzyskałeś w ramach rytuału inicjacji.</p>
+    <p class="medium-bottom-margin">Zdecyduj kogo chcesz przyjąć do swojego serca.</p>
 
 
     {% for god in gods %}
         <div class="jumbotron">
+            <div class="god-box">
+                <div class="god-pic-box">
 
-            <h2>{{ god.name }}</h2>
-            <img src="{{ god.profile_pic.url }}" alt=""></td>
+                    <h2>{{ god.name }}</h2>
 
-            <h4>Opis:</h4>
-            <p>{{ god.god_description }}</p>
+                    <div class="medium-bottom-margin">
+                        <img src="{{ god.profile_pic.url }}" alt="">
+                    </div>
 
-            <h4>Błogosławieństwo:</h4>
-            <h5>{{ god.blessing_name }}</h5>
-            <p>{{ god.blessing_description }}</p>
+                    {% if god.followers.count == 0 %}
+                        <h4>Wyznawcy</h4>
+                        <p>Brak</p>
 
-            <h4>Statystyki:</h4>
-            <p>Sacrum: {{ god.sacrum }}</p>
-            <p>Kształtowanie: {{ god.shaping }}</p>
-            <p>Wir: {{ god.vortex }}</p>
+                    {% else %}
+                        <div class="small-bottom-margin">
+                        <h4>Wyznawcy</h4>
 
-            {% if god.followers.count == 0 %}
-                <h4>Wyznawcy</h4>
-                <p>Brak</p>
-            {% else %}
-                <h4>Wyznawcy</h4>
-                {% for follower in god.followers.all %}
-                    <p>{{ follower }}</p>
-                {% endfor %}
-            {% endif %}
+                        <div class="followers-list">
+                            {% for follower in god.followers.all %}
+                                <div class="followers-list">
 
-            {% if gods_cap > 0 %}
-                {% if god.name not in gods_excluded %}
-                    <form action="{% url "panteon" %}" method="POST">
-                        {% csrf_token %}
-                        <input type="hidden" name="god_name" value="{{ god.name }}">
-                        <input type="submit" value="Zostań wyznawcą">
-                    </form>
-                {% endif %}
-            {% endif %}
+                                <div class="followers-list-item">
+                                    <img src="{{ follower.userprofileinfo.profile_pic.url }}" class="follower-pic" alt="">
+                                    <p>{{ follower }};</p>
+                                </div>
+
+                                </div>
+
+                            {% endfor %}
+                        </div>
+                        </div>
+                    {% endif %}
+
+                    {% if gods_cap > 0 %}
+                        {% if god.name not in gods_excluded %}
+                            <form action="{% url "panteon" %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="god_name" value="{{ god.name }}">
+                                <input type="submit" value="Zostań wyznawcą" class="follow-btn btn btn-outline-dark">
+                            </form>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+                <div>
+                    <div class="big-bottom-margin">
+                        <h4>Opis:</h4>
+                        <p>{{ god.god_description }}</p>
+                    </div>
+
+                    <div class="big-bottom-margin">
+                        <h4>Błogosławieństwo:</h4>
+                        <h5>{{ god.blessing_name }}</h5>
+                        <p>{{ god.blessing_description }}</p>
+                    </div>
+
+                    <h4>Statystyki:</h4>
+                    <p>Sacrum: <strong>{{ god.sacrum }}</strong></p>
+                    <p>Kształtowanie: <strong>{{ god.shaping }}</strong></p>
+                    <p>Wir: <strong>{{ god.vortex }}</strong></p>
+
+
+                </div>
+
+            </div>
         </div>
     {% endfor %}
 

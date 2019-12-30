@@ -23,7 +23,7 @@ def user_page(request):
     user = request.user
     gods = God.objects.all()
 
-    follow_cap = 3 - request.user.userprofileinfo.gods_associated
+    follow_cap = 4 - request.user.userprofileinfo.gods_associated
     creation_cap = 3 - request.user.userprofileinfo.gods_created
 
     gods_sorted = []

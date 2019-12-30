@@ -150,6 +150,10 @@ strong {
     width: 40%;
 }
 
+.god-info-box {
+    width: 60%
+}
+
 .followers-list {
     display: flex;
     flex-direction: row;
@@ -188,7 +192,9 @@ strong {
 
 .profile-pic {
     height: auto;
-    width: auto;
+    width: 100%;
+    max-width: 300px;
+    margin-right: 2em;
 }
 
 
@@ -216,6 +222,10 @@ strong {
     width: 100%;
     }
 
+    .god-info-box {
+    width: 100%
+    }
+
     .follow-btn {
         margin-bottom: 2em;
     }
@@ -233,10 +243,10 @@ strong {
     }
 
     .profile-pic {
-        height: auto;
-        width: auto;
+        /*height: auto;*/
+        /*width: auto;*/
         max-width: 200px;
-        max-height: 250px;
+        /*max-height: 250px;*/
         margin-bottom: 2em;
     }
 }

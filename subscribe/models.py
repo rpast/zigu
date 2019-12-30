@@ -34,9 +34,9 @@ class UserProfileInfo(models.Model):
 
         img = Image.open(self.profile_pic.path)
 
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
+        if img.height > 600 or img.width > 600:
+            output_size = (600, 600)
+            img.thumbnail(output_size, Image.LANCZOS)
             img.save(self.profile_pic.path)
 
 

@@ -77,37 +77,41 @@
 
     {% if user.userprofileinfo.gods_associated > 0 %}
 
-    <div class="container">
-        <h4>Naczynie wypełnia się darami.</h4>
+        <div class="container">
+            <h4>Naczynie wypełnia się darami.</h4>
+        </div>
 
         {% for god in user.god_set.all %}
-            <div class="jumbotron">
-                <div class="god-box">
-                    <div class="god-pic-box">
-                        <h2>{{ god.name }}</h2>
-                        <img src="{{ god.profile_pic.url }}" class="profile-pic" alt=""></td>
-                    </div>
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="god-box">
 
-                    <div>
-                        <div class="medium-bottom-margin">
-                            <h4>Opis:</h4>
-                            <p>{{ god.god_description }}</p>
+                        <div class="god-pic-box">
+                            <h2>{{ god.name }}</h2>
+                            <img src="{{ god.profile_pic.url }}" class="profile-pic" alt="">
                         </div>
 
-                        <div class="big-bottom-margin">
-                            <h4>Błogosławieństwo:</h4>
-                            <h5>{{ god.blessing_name }}</h5>
-                            <p>{{ god.blessing_description }}</p>
-                        </div>
+                        <div class="god-info-box">
+                            <div class="medium-bottom-margin">
+                                <h4>Opis:</h4>
+                                <p>{{ god.god_description }}</p>
+                            </div>
 
-                        <h4>Statystyki:</h4>
-                        <p>Sacrum: <strong>{{ god.sacrum }}</strong></p>
-                        <p>Kształtowanie: <strong>{{ god.shaping }}</strong></p>
-                        <p>Wir: <strong>{{ god.vortex }}</strong></p>
+                            <div class="big-bottom-margin">
+                                <h4>Błogosławieństwo:</h4>
+                                <h5>{{ god.blessing_name }}</h5>
+                                <p>{{ god.blessing_description }}</p>
+                            </div>
+
+                            <h4>Statystyki:</h4>
+                            <p>Sacrum: <strong>{{ god.sacrum }}</strong></p>
+                            <p>Kształtowanie: <strong>{{ god.shaping }}</strong></p>
+                            <p>Wir: <strong>{{ god.vortex }}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
 
         {% endfor %}
 

@@ -148,10 +148,12 @@ strong {
 
 .god-pic-box {
     width: 40%;
+    /*margin: 0 4em;*/
 }
 
 .god-info-box {
     width: 60%
+    /*margin: 0 4em;*/
 }
 
 .followers-list {
@@ -197,7 +199,13 @@ strong {
     margin-right: 2em;
 }
 
-
+.follower-link {
+    text-decoration: none;
+    border: 0;
+    padding: 0.4em;
+    margin: 0;
+    color: black;
+}
 
 
 /*Media queries*/

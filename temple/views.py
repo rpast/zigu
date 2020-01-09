@@ -85,7 +85,10 @@ def panteon(request):
 
     if request.method == "POST":
         god_name = request.POST.get("god_name")
-        if user.userprofileinfo.gods_associated < 4:
+        follower_name = request.POST.get("follower")
+
+
+        if user.userprofileinfo.gods_associated < 5:
             grabbed_god = God.objects.filter(name=god_name).first()
 
             grabbed_god.followers.add(user)

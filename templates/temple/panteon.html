@@ -33,6 +33,13 @@
                                 <div class="followers-list-item">
                                     <img src="{{ follower.userprofileinfo.profile_pic.url }}" class="follower-pic" alt="">
                                     <p>{{ follower }};</p>
+
+{#                                    <form action="{% url "panteon" %}" method="POST">#}
+{#                                        {% csrf_token %}#}
+{#                                        <input type="hidden" name="follower_name" value="{{ follower }}">#}
+{#                                        <input type="submit" value="{{ follower }}" class="follower-link">#}
+{#                                    </form>#}
+
                                 </div>
 
                                 </div>

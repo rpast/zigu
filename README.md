@@ -3,7 +3,7 @@ Temple + Pawn shop
 
 A simple web app project for educational purposes.
 
-Available at [zigu.pl][zigu.pl] 
+Available at [zigu.pl](zigu.pl) 
 
 ---
 

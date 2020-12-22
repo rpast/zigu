@@ -1,9 +1,12 @@
 # zigu
 Temple + Pawn shop
 
-A simple web app project for educational purposes.
+Social web app project for educational purposes.
 
-Available at [zigu.pl](http://www.zigu.pl) 
+- Registration form
+- SQLite
+- Authentication
+- User generated content
 
 ---
 

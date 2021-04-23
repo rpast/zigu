@@ -1,7 +1,5 @@
 # zigu
-Temple + Pawn shop
-
-Social web app project for educational purposes.
+Social web app for educational purposes. 
 
 - Registration form
 - SQLite
